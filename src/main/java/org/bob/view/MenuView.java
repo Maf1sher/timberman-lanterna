@@ -4,6 +4,8 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import org.bob.Tools.DrawStringManager;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -29,6 +31,19 @@ public class MenuView {
                 ' '
         );
 
+        String timbermanString = """
+                 _______ _           _                                    \s
+                |__   __(_)         | |                                   \s
+                   | |   _ _ __ ___ | |__   ___ _ __ _ __ ___   __ _ _ __ \s
+                   | |  | | '_ ` _ \\| '_ \\ / _ \\ '__| '_ ` _ \\ / _` | '_ \\\s
+                   | |  | | | | | | | |_) |  __/ |  | | | | | | (_| | | | |
+                   |_|  |_|_| |_| |_|_.__/ \\___|_|  |_| |_| |_|\\__,_|_| |_|
+        """;
+
+        textGraphics.setBackgroundColor(TextColor.ANSI.GREEN);
+
+        DrawStringManager.drawString(textGraphics,  timbermanString, screenCol / 2 - 5, screenRow / 4 - 5);
+
         textGraphics.setForegroundColor(TextColor.ANSI.BLACK_BRIGHT);
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
 
@@ -42,8 +57,8 @@ public class MenuView {
 
             textGraphics.putString(
                     new TerminalPosition(
-                            screenCol / 2,
-                            screenRow / 2 + i * 2),
+                            screenCol / 2 - 2,
+                            screenRow / 2 + i * 2 - 3),
                     options.get(i)
             );
         }
