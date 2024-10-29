@@ -20,7 +20,7 @@ public class GameController extends Game{
         this.tree = board.getTree();
     }
 
-    public void gameStart(){
+    public int gameStart(){
         this.tree.clear();
         this.score = 0;
         this.timer = 100;
@@ -64,7 +64,7 @@ public class GameController extends Game{
         }
         gameUI.drwaGameOver(score);
         gameUI.update();
-
+        return score;
     }
 
     private void refreshBoard(){

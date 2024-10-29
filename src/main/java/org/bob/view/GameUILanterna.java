@@ -11,6 +11,7 @@ import org.bob.model.Board;
 import org.bob.model.Timberman;
 
 import java.io.IOException;
+import java.util.LinkedList;
 
 public class GameUILanterna implements GameUI{
 
@@ -111,7 +112,7 @@ public class GameUILanterna implements GameUI{
     }
 
     @Override
-    public void drawScoreboard() {
-        scoreboardView.draw(textGraphics);
+    public void drawScoreboard(LinkedList<Integer> scoreboard) {
+        scoreboardView.draw(textGraphics, scoreboard);
     }
 }

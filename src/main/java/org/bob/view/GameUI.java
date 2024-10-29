@@ -3,6 +3,8 @@ package org.bob.view;
 import org.bob.model.Board;
 import org.bob.model.Timberman;
 
+import java.util.LinkedList;
+
 public interface GameUI {
     void init();
     void update();
@@ -14,5 +16,5 @@ public interface GameUI {
     void drawScore(int score);
     void drwaGameOver(int score);
     void drawTimer(int time);
-    void drawScoreboard();
+    void drawScoreboard(LinkedList<Integer> scoreboard);
 }

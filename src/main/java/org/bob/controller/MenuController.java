@@ -2,16 +2,24 @@ package org.bob.controller;
 
 import org.bob.view.GameUI;
 
+import java.io.*;
+import java.util.Collections;
+import java.util.LinkedList;
+import java.util.stream.Collectors;
+
 public class MenuController{
 
     private final GameController gameController;
     private final GameUI gameUI;
     private boolean menuRunning = true;
     private int selectedOption = 0;
+    private final LinkedList<Integer> scoreBoard;
+    private final String scoreBoardFileName = "scoreboard.txt";
 
     public MenuController(GameUI gameUI) {
         this.gameUI = gameUI;
         this.gameController = new GameController(gameUI);
+        this.scoreBoard = readScoreBoard();
     }
 
     public void run(){
@@ -22,7 +30,9 @@ public class MenuController{
             gameUI.update();
             if(KeyController.isEnternProcessed()){
                 if(selectedOption == 0){
-                    gameController.gameStart();
+                    int score = gameController.gameStart();
+                    scoreBoard.add(score);
+                    scoreBoard.sort(Collections.reverseOrder());
                     while(!KeyController.isEnternProcessed());
                 }
 
@@ -33,11 +43,16 @@ public class MenuController{
                 if(selectedOption == 2){
                     gameUI.close();
                     menuRunning = false;
+                    try {
+                        saveScoreBoard();
+                    }catch (IOException e) {
+                        throw new RuntimeException(e);
+                    }
                 }
             }
 
             if(KeyController.isDownProcessed()){
-                if(selectedOption < 1){
+                if(selectedOption < 2){
                     selectedOption++;
                 }
             }
@@ -52,9 +67,37 @@ public class MenuController{
 
     private void scoreBoardMenu(){
         gameUI.drawBackground();
-        gameUI.drawScoreboard();
+        gameUI.drawScoreboard(scoreBoard.stream().limit(10).collect(Collectors.toCollection(LinkedList::new)));
         gameUI.update();
 
         while(!KeyController.isEnternProcessed());
+    }
+
+    private void saveScoreBoard() throws IOException {
+        BufferedWriter writer = new BufferedWriter(new FileWriter(scoreBoardFileName));
+        for(int i = 0; i < (Math.min(scoreBoard.size(), 10)); i++){
+            writer.write(scoreBoard.get(i) + "\n");
+        }
+        writer.close();
+    }
+
+    private LinkedList<Integer> readScoreBoard(){
+        BufferedReader reader;
+        LinkedList<Integer> readedScoreBoard = new LinkedList<>();
+
+        try {
+            reader = new BufferedReader(new FileReader(scoreBoardFileName));
+            String line = reader.readLine();
+
+            while (line != null && !line.equals("\n")) {
+                readedScoreBoard.add(Integer.parseInt(line));
+                line = reader.readLine();
+            }
+
+            reader.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return readedScoreBoard;
     }
 }

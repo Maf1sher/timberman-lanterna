@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import org.bob.Tools.DrawStringManager;
 
 public class GameOverView {
 
@@ -14,7 +15,7 @@ public class GameOverView {
         int width = 50;
         int height = 20;
 
-        textGraphics.setBackgroundColor(TextColor.ANSI.MAGENTA);
+        textGraphics.setBackgroundColor(new TextColor.RGB(208, 205, 205));
 
         textGraphics.fillRectangle(
                 new TerminalPosition(
@@ -25,32 +26,22 @@ public class GameOverView {
         );
 
         String gameOverString =
-                "   ____    _    __  __ _____ \n" +
-                "  / ___|  / \\  |  \\/  | ____|\n" +
-                " | |  _  / _ \\ | |\\/| |  _|  \n" +
-                " | |_| |/ ___ \\| |  | | |___ \n" +
-                "  \\____/_/   \\_\\_|__|_|_____|\n" +
-                "  / _ \\ \\   / / ____|  _ \\   \n" +
-                " | | | \\ \\ / /|  _| | |_) |  \n" +
-                " | |_| |\\ V / | |___|  _ <   \n" +
-                "  \\___/  \\_/  |_____|_| \\_\\  \n";
+                """
+                           ____    _    __  __ _____\s
+                          / ___|  / \\  |  \\/  | ____|
+                         | |  _  / _ \\ | |\\/| |  _| \s
+                         | |_| |/ ___ \\| |  | | |___\s
+                          \\____/_/   \\_\\_|__|_|_____|
+                          / _ \\ \\   / / ____|  _ \\  \s
+                         | | | \\ \\ / /|  _| | |_) | \s
+                         | |_| |\\ V / | |___|  _ <  \s
+                          \\___/  \\_/  |_____|_| \\_\\ \s
+                        """;
 
         textGraphics.setForegroundColor(TextColor.ANSI.BLACK);
-        drawString(textGraphics, gameOverString, screenCol / 2, screenRow / 2 - 10);
+        DrawStringManager.drawString(textGraphics, gameOverString, screenCol / 2, screenRow / 2 - 10);
 
-        textGraphics.setBackgroundColor(null);
-        textGraphics.putString(
-                new TerminalPosition(
-                        screenCol / 2,
-                        screenRow / 2 ),
-                String.valueOf(score)
-        );
-    }
-
-    private void drawString(TextGraphics textGraphics, String text, int x, int y){
-        String[] lines = text.split("\n");
-        for(int i = 0; i < lines.length; i++){
-            textGraphics.putString(x - lines[i].length() / 2, y + i, lines[i]);
-        }
+        String scoreString = DrawStringManager.convertNumberToString(score);
+        DrawStringManager.drawString(textGraphics, scoreString, screenCol / 2, screenRow / 2);
     }
 }
