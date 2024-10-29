@@ -13,7 +13,7 @@ public class TimbermanrView {
     public void draw(TextGraphics textGraphics, Timberman timberman) {
 
         int screenCol = textGraphics.getSize().getColumns();
-        textGraphics.setBackgroundColor(new TextColor.RGB(166, 13, 31));
+        textGraphics.setBackgroundColor(timberman.getColor());
 
         textGraphics.fillRectangle(
                 new TerminalPosition(timberman.getSide() ? screenCol / 2 - 11 : screenCol / 2 + 5, 39),

@@ -12,6 +12,10 @@ public class Game {
         this.timberman = new Timberman();
     }
 
+    public Timberman getTimberman() {
+        return timberman;
+    }
+
     public int getScore() {
         return score;
     }

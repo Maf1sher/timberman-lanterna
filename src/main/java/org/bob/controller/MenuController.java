@@ -1,5 +1,7 @@
 package org.bob.controller;
 
+import com.googlecode.lanterna.TextColor;
+import org.bob.model.Timberman;
 import org.bob.view.GameUI;
 
 import java.io.*;
@@ -15,6 +17,14 @@ public class MenuController{
     private int selectedOption = 0;
     private final LinkedList<Integer> scoreBoard;
     private final String scoreBoardFileName = "scoreboard.txt";
+
+    private final TextColor[] colors = {
+            new TextColor.RGB(166, 13, 31),
+            new TextColor.RGB(0, 255, 0),
+            new TextColor.RGB(0, 0, 255),
+            new TextColor.RGB(255, 255, 0),
+            new TextColor.RGB(255, 165, 0) 
+    };
 
     public MenuController(GameUI gameUI) {
         this.gameUI = gameUI;
@@ -41,6 +51,10 @@ public class MenuController{
                 }
 
                 if(selectedOption == 2){
+                    colorMenu();
+                }
+
+                if(selectedOption == 3){
                     gameUI.close();
                     menuRunning = false;
                     try {
@@ -52,7 +66,7 @@ public class MenuController{
             }
 
             if(KeyController.isDownProcessed()){
-                if(selectedOption < 2){
+                if(selectedOption < 3){
                     selectedOption++;
                 }
             }
@@ -71,6 +85,30 @@ public class MenuController{
         gameUI.update();
 
         while(!KeyController.isEnternProcessed());
+    }
+
+    public void colorMenu(){
+        int selectedColorIndex = 0;
+
+        while (true) {
+            gameUI.drawBackground();
+            gameUI.drawColorMenu(selectedColorIndex, colors);
+            gameUI.update();
+
+            if (KeyController.isUpProcessed()) {
+                selectedColorIndex = (selectedColorIndex - 1 + colors.length) % colors.length;
+            }
+
+            if (KeyController.isDownProcessed()) {
+                selectedColorIndex = (selectedColorIndex + 1) % colors.length;
+            }
+
+            if (KeyController.isEnternProcessed()) {
+                Timberman timberman = gameController.getTimberman();
+                timberman.setColor(colors[selectedColorIndex]);
+                break;
+            }
+        }
     }
 
     private void saveScoreBoard() throws IOException {
