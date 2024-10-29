@@ -18,7 +18,7 @@ public class TimerView {
         int width = 25;
         int height = 3;
 
-        textGraphics.setBackgroundColor(TextColor.ANSI.BLUE);
+        textGraphics.setBackgroundColor(new TextColor.RGB(81, 78, 59));
 
         textGraphics.fillRectangle(
                 new TerminalPosition(

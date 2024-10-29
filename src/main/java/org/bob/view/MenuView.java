@@ -13,7 +13,7 @@ import java.util.List;
 public class MenuView {
 
     private final int width = 50;
-    private final int height = 20;
+    private final int height = 25;
 
     public MenuView() {
 
