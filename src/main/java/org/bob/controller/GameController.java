@@ -35,22 +35,12 @@ public class GameController extends Game{
             calculateTime();
             if(KeyController.isLeftPressed()){
                 timberman.setLeftSide();
-                tree.add(generateLevel());
-                deleteLevel();
-                score++;
-                if(timer < 100)
-                    timer++;
-                refreshBoard();
+                cutLevel();
             }
 
             if(KeyController.isRightPressed()){
                 timberman.setRightSide();
-                tree.add(generateLevel());
-                deleteLevel();
-                score++;
-                if(timer < 100)
-                    timer++;
-                refreshBoard();
+                cutLevel();
             }
 
 
@@ -65,6 +55,15 @@ public class GameController extends Game{
         gameUI.drwaGameOver(score);
         gameUI.update();
         return score;
+    }
+
+    private void cutLevel(){
+        tree.add(generateLevel());
+        deleteLevel();
+        score++;
+        if(timer < 100)
+            timer++;
+        refreshBoard();
     }
 
     private void refreshBoard(){
