@@ -1,6 +1,7 @@
 package org.bob.view;
 
 import com.googlecode.lanterna.TerminalSize;
+import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
@@ -10,6 +11,7 @@ import com.googlecode.lanterna.terminal.swing.TerminalEmulatorAutoCloseTrigger;
 import org.bob.model.Board;
 import org.bob.model.Timberman;
 
+import java.awt.*;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -26,6 +28,7 @@ public class GameUILanterna implements GameUI{
     private final GameOverView gameOverView;
     private final TimerView timerView;
     private final ScoreboardView scoreboardView;
+    private final ColorView colorView;
 
     public GameUILanterna() {
         this.menuView = new MenuView();
@@ -36,6 +39,7 @@ public class GameUILanterna implements GameUI{
         this.gameOverView = new GameOverView();
         this.timerView = new TimerView();
         this.scoreboardView = new ScoreboardView();
+        this.colorView = new ColorView();
     }
 
 
@@ -114,5 +118,10 @@ public class GameUILanterna implements GameUI{
     @Override
     public void drawScoreboard(LinkedList<Integer> scoreboard) {
         scoreboardView.draw(textGraphics, scoreboard);
+    }
+
+    @Override
+    public void drawColorMenu(int selectedColorIndex, TextColor[] colors) {
+        colorView.draw(textGraphics, selectedColorIndex, colors);
     }
 }

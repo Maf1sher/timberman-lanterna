@@ -47,7 +47,7 @@ public class MenuView {
         textGraphics.setForegroundColor(TextColor.ANSI.BLACK_BRIGHT);
         textGraphics.setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
 
-        ArrayList<String> options = new ArrayList<>(List.of("Graj", "Wyniki" ,"Wyjdz"));
+        ArrayList<String> options = new ArrayList<>(List.of("Graj", "Wyniki", "Konfiguracja" ,"Wyjdz"));
 
         for (int i = 0; i < options.size(); i++) {
             if(i == selectOption)

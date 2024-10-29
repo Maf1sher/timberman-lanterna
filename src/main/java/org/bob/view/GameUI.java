@@ -1,5 +1,6 @@
 package org.bob.view;
 
+import com.googlecode.lanterna.TextColor;
 import org.bob.model.Board;
 import org.bob.model.Timberman;
 
@@ -17,4 +18,5 @@ public interface GameUI {
     void drwaGameOver(int score);
     void drawTimer(int time);
     void drawScoreboard(LinkedList<Integer> scoreboard);
+    void drawColorMenu(int selectedColorIndex, TextColor[] colors);
 }
