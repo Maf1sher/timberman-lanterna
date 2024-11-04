@@ -33,15 +33,26 @@ public class MenuView {
                 ' '
         );
 
-        String timbermanString = """
-                ___          __   ___  __                 \s
-                 |  |  |\\/| |__) |__  |__)  |\\/|  /\\  |\\ |\s
-                 |  |  |  | |__) |___ |  \\  |  | /~~\\ | \\|\s
-        """;
+//        String timbermanString = """
+//                ___          __   ___  __                 \s
+//                 |  |  |\\/| |__) |__  |__)  |\\/|  /\\  |\\ |\s
+//                 |  |  |  | |__) |___ |  \\  |  | /~~\\ | \\|\s
+//        """;
 
-        textGraphics.setBackgroundColor(TextColor.ANSI.GREEN);
+        String timbermanString =
+                """
+                         _______ _____ __  __ ____  ______ _____  __  __          _   _\s
+                         |__   __|_   _|  \\/  |  _ \\|  ____|  __ \\|  \\/  |   /\\   | \\ | |
+                            | |    | | | \\  / | |_) | |__  | |__) | \\  / |  /  \\  |  \\| |
+                            | |    | | | |\\/| |  _ <|  __| |  _  /| |\\/| | / /\\ \\ | . ` |
+                            | |   _| |_| |  | | |_) | |____| | \\ \\| |  | |/ ____ \\| |\\  |
+                            |_|  |_____|_|  |_|____/|______|_|  \\_\\_|  |_/_/    \\_\\_| \\_|\
+                        """;
 
-        DrawStringManager.drawString(textGraphics,  timbermanString, screenCol / 2 - 5, screenRow / 4 - 5);
+        textGraphics.setBackgroundColor(new TextColor.RGB(149, 91, 25));
+        textGraphics.setForegroundColor(TextColor.ANSI.BLACK);
+
+        DrawStringManager.drawString(textGraphics,  timbermanString, screenCol / 2, screenRow / 4 - 5);
 
 //        textGraphics.setForegroundColor(TextColor.ANSI.BLACK_BRIGHT);
 //        textGraphics.setBackgroundColor(TextColor.ANSI.CYAN);

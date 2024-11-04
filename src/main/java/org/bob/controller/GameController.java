@@ -4,24 +4,16 @@ import org.bob.model.Game;
 import org.bob.model.TupleBoolean;
 import org.bob.view.GameUI;
 
-import java.util.List;
-import java.util.Random;
-
 public class GameController extends Game{
 
     private final GameUI gameUI;
-    private final List<TupleBoolean> tree;
-    private final Random rand;
-    private boolean branchLevel = false;
 
     public GameController(GameUI gameUI) {
         this.gameUI = gameUI;
-        this.rand = new Random();
-        this.tree = board.getTree();
     }
 
     public int gameStart(){
-        this.tree.clear();
+        this.board.cleadBoard();
         this.score = 0;
         this.timer = 100;
         board.addLevel(new TupleBoolean(false, false));
@@ -58,8 +50,8 @@ public class GameController extends Game{
     }
 
     private void cutLevel(){
-        tree.add(generateLevel());
-        deleteLevel();
+        board.addLevel(generateLevel());
+        board.deleteLevel();
         score++;
         if(timer < 100)
             timer++;
@@ -75,28 +67,15 @@ public class GameController extends Game{
         gameUI.update();
     }
 
-    private void deleteLevel(){
-        tree.remove(0);
-    }
-
-    private TupleBoolean generateLevel(){
-        if(branchLevel){
-            boolean side = rand.nextBoolean();
-            branchLevel = false;
-            return new TupleBoolean(side, !side);
-        }
-        branchLevel = true;
-        return new TupleBoolean(false, false);
-    }
 
     private boolean gameOver() {
         if(timer <= 0)
             return false;
 
-        if(timberman.isLeftSide() && tree.get(0).getValue1())
+        if(timberman.isLeftSide() && board.getFirstLevel().getValue1())
             return false;
 
-        if(timberman.isRightSide() && tree.get(0).getValue2())
+        if(timberman.isRightSide() && board.getFirstLevel().getValue2())
             return false;
 
         return true;

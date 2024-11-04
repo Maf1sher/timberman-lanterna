@@ -23,4 +23,16 @@ public class Board {
     public void addLevel(TupleBoolean level){
         tree.add(level);
     }
+
+    public void deleteLevel(){
+        tree.remove(0);
+    }
+
+    public void cleadBoard(){
+        tree.clear();
+    }
+
+    public TupleBoolean getFirstLevel(){
+        return tree.get(0);
+    }
 }
