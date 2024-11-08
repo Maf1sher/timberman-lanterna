@@ -5,10 +5,11 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import org.bob.Tools.DrawStringManager;
+import org.bob.enums.RGBColorEnums;
 
 public class ColorView {
 
-    public void draw(TextGraphics textGraphics, int selectedColorIndex, TextColor[] colors) {
+    public void draw(TextGraphics textGraphics, int selectedColorIndex, RGBColorEnums[] colors) {
 
         int screenCol = textGraphics.getSize().getColumns();
         int screenRow = textGraphics.getSize().getRows();
@@ -49,7 +50,7 @@ public class ColorView {
                 textGraphics.setBackgroundColor(TextColor.ANSI.DEFAULT);
             }
 
-            textGraphics.setForegroundColor(colors[i]);
+            textGraphics.setForegroundColor(new TextColor.RGB(colors[i].getR(), colors[i].getG(), colors[i].getB()));
             String colorOption = "Color " + (i + 1);
 
             textGraphics.putString(screenCol / 2 - 10, screenRow / 2 + i, colorOption);

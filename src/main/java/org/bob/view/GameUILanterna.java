@@ -1,17 +1,16 @@
 package org.bob.view;
 
 import com.googlecode.lanterna.TerminalSize;
-import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import com.googlecode.lanterna.screen.Screen;
 import com.googlecode.lanterna.screen.TerminalScreen;
 import com.googlecode.lanterna.terminal.DefaultTerminalFactory;
 import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.TerminalEmulatorAutoCloseTrigger;
+import org.bob.enums.RGBColorEnums;
 import org.bob.model.Board;
 import org.bob.model.Timberman;
 
-import java.awt.*;
 import java.io.IOException;
 import java.util.LinkedList;
 
@@ -121,7 +120,7 @@ public class GameUILanterna implements GameUI{
     }
 
     @Override
-    public void drawColorMenu(int selectedColorIndex, TextColor[] colors) {
+    public void drawColorMenu(int selectedColorIndex, RGBColorEnums[] colors) {
         colorView.draw(textGraphics, selectedColorIndex, colors);
     }
 }

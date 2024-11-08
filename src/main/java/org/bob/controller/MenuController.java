@@ -1,6 +1,6 @@
 package org.bob.controller;
 
-import com.googlecode.lanterna.TextColor;
+import org.bob.enums.RGBColorEnums;
 import org.bob.model.Timberman;
 import org.bob.view.GameUI;
 
@@ -18,12 +18,12 @@ public class MenuController{
     private final LinkedList<Integer> scoreBoard;
     private final String scoreBoardFileName = "scoreboard.txt";
 
-    private final TextColor[] colors = {
-            new TextColor.RGB(166, 13, 31),
-            new TextColor.RGB(0, 255, 0),
-            new TextColor.RGB(0, 0, 255),
-            new TextColor.RGB(255, 255, 0),
-            new TextColor.RGB(255, 165, 0) 
+    private final RGBColorEnums[] colors = {
+            RGBColorEnums.RED,
+            RGBColorEnums.GREEN,
+            RGBColorEnums.BLUE,
+            RGBColorEnums.YELLOW,
+            RGBColorEnums.ORANGE
     };
 
     public MenuController(GameUI gameUI) {

@@ -69,6 +69,11 @@ public class KeyController {
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new KeyEventDispatcher() {
             @Override
             public boolean dispatchKeyEvent(KeyEvent mykey) {
+                try {
+                    Thread.sleep(10);
+                } catch (InterruptedException e) {
+                    throw new RuntimeException(e);
+                }
                 synchronized (KeyController.class) {
                     switch (mykey.getID()) {
                         case KeyEvent.KEY_PRESSED:

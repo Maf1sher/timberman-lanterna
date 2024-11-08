@@ -4,6 +4,7 @@ import com.googlecode.lanterna.TerminalPosition;
 import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
+import org.bob.enums.RGBColorEnums;
 import org.bob.model.Timberman;
 
 public class TimbermanrView {
@@ -12,8 +13,9 @@ public class TimbermanrView {
 //    @Override
     public void draw(TextGraphics textGraphics, Timberman timberman) {
 
+        RGBColorEnums color =  timberman.getColor();
         int screenCol = textGraphics.getSize().getColumns();
-        textGraphics.setBackgroundColor(timberman.getColor());
+        textGraphics.setBackgroundColor(new TextColor.RGB(color.getR(), color.getG(),color.getB()));
 
         textGraphics.fillRectangle(
                 new TerminalPosition(timberman.getSide() ? screenCol / 2 - 11 : screenCol / 2 + 5, 39),
