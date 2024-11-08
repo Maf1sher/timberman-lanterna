@@ -95,11 +95,11 @@ public class MenuController{
             gameUI.drawColorMenu(selectedColorIndex, colors);
             gameUI.update();
 
-            if (KeyController.isUpProcessed()) {
+            if (KeyController.isLeftPressed()) {
                 selectedColorIndex = (selectedColorIndex - 1 + colors.length) % colors.length;
             }
 
-            if (KeyController.isDownProcessed()) {
+            if (KeyController.isRightPressed()) {
                 selectedColorIndex = (selectedColorIndex + 1) % colors.length;
             }
 
