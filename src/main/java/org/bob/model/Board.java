@@ -28,7 +28,7 @@ public class Board {
         tree.remove(0);
     }
 
-    public void cleadBoard(){
+    public void clearBoard(){
         tree.clear();
     }
 

@@ -61,7 +61,7 @@ public class BoardTest {
     public void testClearBoard(){
         board.addLevel(new TupleBoolean(true, false));
 
-        board.cleadBoard();
+        board.clearBoard();
         assertEquals(0, board.getTree().size());
     }
 

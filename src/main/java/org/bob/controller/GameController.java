@@ -12,41 +12,49 @@ public class GameController extends Game{
         this.gameUI = gameUI;
     }
 
-    public int gameStart(){
-        this.board.cleadBoard();
-        this.score = 0;
-        this.timer = 100;
+    public int startGame(){
+        initializeGame();
+        while(gameOver()){
+            gameLoop();
+        }
+        endGame();
+        return score;
+    }
+
+    private void initializeGame() {
+        board.clearBoard();
         board.addLevel(new TupleBoolean(false, false));
         for (int i = 0; i < 10; i++) {
             board.addLevel(generateLevel());
         }
         refreshBoard();
+    }
 
-        while(gameOver()){
-            tick++;
-            calculateTime();
-            if(KeyController.isLeftPressed()){
-                timberman.setLeftSide();
-                cutLevel();
-            }
-
-            if(KeyController.isRightPressed()){
-                timberman.setRightSide();
-                cutLevel();
-            }
-
-
-            try {
-                Thread.sleep(20);
-            }catch (InterruptedException e){
-                e.printStackTrace();
-            }
-            gameUI.drawTimer(timer);
-            gameUI.update();
+    private void gameLoop(){
+        tick++;
+        calculateTime();
+        if(KeyController.isLeftPressed()){
+            timberman.setLeftSide();
+            cutLevel();
         }
+
+        if(KeyController.isRightPressed()){
+            timberman.setRightSide();
+            cutLevel();
+        }
+
+        try {
+            Thread.sleep(20);
+        }catch (InterruptedException e){
+            e.printStackTrace();
+        }
+        gameUI.drawTimer(timer);
+        gameUI.update();
+    }
+
+    private void endGame() {
         gameUI.drwaGameOver(score);
         gameUI.update();
-        return score;
     }
 
     private void cutLevel(){
