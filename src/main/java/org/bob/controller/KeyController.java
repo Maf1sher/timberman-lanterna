@@ -17,42 +17,34 @@ public class KeyController {
     private static volatile boolean enterProcessed = false;
 
     public static boolean isLeftPressed() {
-        synchronized (KeyController.class) {
-            if (leftPressed && !leftProcessed) {
-                leftProcessed = true;
-                return true;
-            }
-            return false;
+        if (leftPressed && !leftProcessed) {
+            leftProcessed = true;
+            return true;
         }
+        return false;
     }
     public static boolean isRightPressed() {
-        synchronized (KeyController.class) {
-            if (rightPressed && !rightProcessed) {
-                rightProcessed = true;
-                return true;
-            }
-            return false;
+        if (rightPressed && !rightProcessed) {
+            rightProcessed = true;
+            return true;
         }
+        return false;
     }
 
     public static boolean isUpProcessed() {
-        synchronized (KeyController.class) {
-            if (upPressed && !upProcessed) {
-                upProcessed = true;
-                return true;
-            }
-            return false;
+        if (upPressed && !upProcessed) {
+            upProcessed = true;
+            return true;
         }
+        return false;
     }
 
     public static boolean isDownProcessed() {
-        synchronized (KeyController.class) {
-            if (downPressed && !downProcessed) {
-                downProcessed = true;
-                return true;
-            }
-            return false;
+        if (downPressed && !downProcessed) {
+            downProcessed = true;
+            return true;
         }
+        return false;
     }
 
     public static boolean isEnternProcessed() {
@@ -74,51 +66,49 @@ public class KeyController {
                 } catch (InterruptedException e) {
                     throw new RuntimeException(e);
                 }
-                synchronized (KeyController.class) {
-                    switch (mykey.getID()) {
-                        case KeyEvent.KEY_PRESSED:
-                            if (mykey.getKeyCode() == KeyEvent.VK_LEFT) {
-                                leftPressed = true;
-                            }
-                            else if (mykey.getKeyCode() == KeyEvent.VK_RIGHT) {
-                                rightPressed = true;
-                            }
-                            else if (mykey.getKeyCode() == KeyEvent.VK_UP) {
-                                upPressed = true;
-                            }
-                            else if (mykey.getKeyCode() == KeyEvent.VK_DOWN) {
-                                downPressed = true;
-                            }
-                            else if (mykey.getKeyCode() == KeyEvent.VK_ENTER) {
-                                enterPressed = true;
-                            }
-                            break;
+                switch (mykey.getID()) {
+                    case KeyEvent.KEY_PRESSED:
+                        if (mykey.getKeyCode() == KeyEvent.VK_LEFT) {
+                            leftPressed = true;
+                        }
+                        else if (mykey.getKeyCode() == KeyEvent.VK_RIGHT) {
+                            rightPressed = true;
+                        }
+                        else if (mykey.getKeyCode() == KeyEvent.VK_UP) {
+                            upPressed = true;
+                        }
+                        else if (mykey.getKeyCode() == KeyEvent.VK_DOWN) {
+                            downPressed = true;
+                        }
+                        else if (mykey.getKeyCode() == KeyEvent.VK_ENTER) {
+                            enterPressed = true;
+                        }
+                        break;
 
-                        case KeyEvent.KEY_RELEASED:
-                            if (mykey.getKeyCode() == KeyEvent.VK_LEFT) {
-                                leftPressed = false;
-                                leftProcessed = false;
-                            }
-                            else if (mykey.getKeyCode() == KeyEvent.VK_RIGHT) {
-                                rightPressed = false;
-                                rightProcessed = false;
-                            }
-                            else if (mykey.getKeyCode() == KeyEvent.VK_UP) {
-                                upPressed = false;
-                                upProcessed = false;
-                            }
-                            else if (mykey.getKeyCode() == KeyEvent.VK_DOWN) {
-                                downPressed = false;
-                                downProcessed = false;
-                            }
-                            else if (mykey.getKeyCode() == KeyEvent.VK_ENTER) {
-                                enterPressed = false;
-                                enterProcessed = false;
-                            }
-                            break;
-                    }
-                    return false;
+                    case KeyEvent.KEY_RELEASED:
+                        if (mykey.getKeyCode() == KeyEvent.VK_LEFT) {
+                            leftPressed = false;
+                            leftProcessed = false;
+                        }
+                        else if (mykey.getKeyCode() == KeyEvent.VK_RIGHT) {
+                            rightPressed = false;
+                            rightProcessed = false;
+                        }
+                        else if (mykey.getKeyCode() == KeyEvent.VK_UP) {
+                            upPressed = false;
+                            upProcessed = false;
+                        }
+                        else if (mykey.getKeyCode() == KeyEvent.VK_DOWN) {
+                            downPressed = false;
+                            downProcessed = false;
+                        }
+                        else if (mykey.getKeyCode() == KeyEvent.VK_ENTER) {
+                            enterPressed = false;
+                            enterProcessed = false;
+                        }
+                        break;
                 }
+                return false;
             }
         });
     }
