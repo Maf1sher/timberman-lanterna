@@ -11,17 +11,9 @@ import java.util.List;
 
 public class BoardView{
 
-    private int trunkWidth = 8;
-    private int trunkHeight = 5;
+    private final int trunkWidth = 8;
+    private final int trunkHeight = 5;
 
-    private int branchWidth = 15;
-    private int branchHeight = 1;
-
-//    public BoardView(Board board) {
-//        this.model = board;
-//    }
-
-//    @Override
     public void draw(TextGraphics textGraphics, Board board) {
         List<TupleBoolean> list = board.getTree();
         for (int i = 0; i < list.size(); i++) {
@@ -42,7 +34,7 @@ public class BoardView{
         int screenCol = textGraphics.getSize().getColumns();
         int screenRow = textGraphics.getSize().getRows();
 
-        textGraphics.setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+        textGraphics.setBackgroundColor(new TextColor.RGB(61, 43, 13));
         textGraphics.fillRectangle(
                 new TerminalPosition(
                         (screenCol / 2) - trunkWidth / 2,
@@ -57,13 +49,28 @@ public class BoardView{
         int screenCol = textGraphics.getSize().getColumns();
         int screenRow = textGraphics.getSize().getRows();
 
-        textGraphics.setBackgroundColor(TextColor.ANSI.BLACK_BRIGHT);
+
+        int branchWidth = 15;
+        int branchHeight = 1;
+
+        textGraphics.setBackgroundColor(new TextColor.RGB(61, 43, 13));
         textGraphics.drawRectangle(
                 new TerminalPosition(
                         reverse ? (screenCol / 2) + trunkWidth / 2 : (screenCol / 2) - branchWidth - trunkWidth / 2,
                         screenRow - 10 - row * trunkHeight + trunkWidth / 4
                 ),
                 new TerminalSize(branchWidth,branchHeight),
+                ' '
+        );
+
+        textGraphics.setBackgroundColor(new TextColor.RGB(27, 142, 14));
+        textGraphics.drawRectangle(
+                new TerminalPosition(
+                        reverse ? (screenCol / 2) + trunkWidth / 2 + branchWidth - 4: (screenCol / 2) - branchWidth - trunkWidth / 2,
+                        screenRow - 10 - row * trunkHeight + trunkWidth / 4 -1
+
+                ),
+                new TerminalSize(4,1),
                 ' '
         );
     }
