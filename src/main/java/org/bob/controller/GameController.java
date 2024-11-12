@@ -23,6 +23,8 @@ public class GameController extends Game{
 
     private void initializeGame() {
         board.clearBoard();
+        this.score = 0;
+        this.timer = 100;
         board.addLevel(new TupleBoolean(false, false));
         for (int i = 0; i < 10; i++) {
             board.addLevel(generateLevel());
