@@ -5,12 +5,14 @@ import com.googlecode.lanterna.TerminalSize;
 import com.googlecode.lanterna.TextColor;
 import com.googlecode.lanterna.graphics.TextGraphics;
 import org.bob.Tools.DrawStringManager;
+import org.bob.model.GameResult;
 
 import java.util.LinkedList;
+import java.util.List;
 
 public class ScoreboardView {
 
-    public void draw(TextGraphics textGraphics, LinkedList<Integer> scoreboard) {
+    public void draw(TextGraphics textGraphics, List<GameResult> scoreboard) {
 
         int screenCol = textGraphics.getSize().getColumns();
         int screenRow = textGraphics.getSize().getRows();
@@ -44,7 +46,7 @@ public class ScoreboardView {
         for (int i = 0; i < scoreboard.size(); i++) {
             textGraphics.putString(
                     new TerminalPosition(
-                            screenCol / 2,
+                            screenCol / 2 - 8,
                             screenRow / 4 + 5 + i * 2),
                     i + 1 + ". " + scoreboard.get(i)
             );

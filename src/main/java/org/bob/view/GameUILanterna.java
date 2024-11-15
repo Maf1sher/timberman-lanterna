@@ -9,10 +9,12 @@ import com.googlecode.lanterna.terminal.Terminal;
 import com.googlecode.lanterna.terminal.swing.TerminalEmulatorAutoCloseTrigger;
 import org.bob.enums.RGBColorEnums;
 import org.bob.model.Board;
+import org.bob.model.GameResult;
 import org.bob.model.Timberman;
 
 import java.io.IOException;
 import java.util.LinkedList;
+import java.util.List;
 
 public class GameUILanterna implements GameUI{
 
@@ -105,8 +107,8 @@ public class GameUILanterna implements GameUI{
     }
 
     @Override
-    public void drwaGameOver(int score) {
-        gameOverView.draw(textGraphics, score);
+    public void drwaGameOver(int score, String nick) {
+        gameOverView.draw(textGraphics, score, nick);
     }
 
     @Override
@@ -115,7 +117,7 @@ public class GameUILanterna implements GameUI{
     }
 
     @Override
-    public void drawScoreboard(LinkedList<Integer> scoreboard) {
+    public void drawScoreboard(List<GameResult> scoreboard) {
         scoreboardView.draw(textGraphics, scoreboard);
     }
 
@@ -123,4 +125,11 @@ public class GameUILanterna implements GameUI{
     public void drawColorMenu(int selectedColorIndex, RGBColorEnums[] colors) {
         colorView.draw(textGraphics, selectedColorIndex, colors);
     }
+
+    @Override
+    public Terminal getTerminal() {
+        return terminal;
+    }
+
+
 }

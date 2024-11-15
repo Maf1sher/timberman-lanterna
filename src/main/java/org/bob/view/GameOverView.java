@@ -8,7 +8,7 @@ import org.bob.Tools.DrawStringManager;
 
 public class GameOverView {
 
-    public void draw(TextGraphics textGraphics, int score) {
+    public void draw(TextGraphics textGraphics, int score, String nick) {
         int screenCol = textGraphics.getSize().getColumns();
         int screenRow = textGraphics.getSize().getRows();
 
@@ -43,5 +43,8 @@ public class GameOverView {
 
         String scoreString = DrawStringManager.convertNumberToString(score);
         DrawStringManager.drawString(textGraphics, scoreString, screenCol / 2, screenRow / 2);
+
+        String nickString = "Podaj nick: " + (nick != null ? nick : "");
+        DrawStringManager.drawString(textGraphics, nickString, screenCol / 2, screenRow / 2 + 5);
     }
 }

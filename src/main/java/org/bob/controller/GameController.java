@@ -1,8 +1,13 @@
 package org.bob.controller;
 
+import com.googlecode.lanterna.input.KeyStroke;
+import com.googlecode.lanterna.terminal.Terminal;
 import org.bob.model.Game;
+import org.bob.model.GameResult;
 import org.bob.model.TupleBoolean;
 import org.bob.view.GameUI;
+
+import java.io.IOException;
 
 public class GameController extends Game{
 
@@ -12,13 +17,13 @@ public class GameController extends Game{
         this.gameUI = gameUI;
     }
 
-    public int startGame(){
+    public GameResult startGame(){
         initializeGame();
         while(gameOver()){
             gameLoop();
         }
-        endGame();
-        return score;
+        String nick = endGame();
+        return new GameResult(score, nick);
     }
 
     private void initializeGame() {
@@ -54,9 +59,46 @@ public class GameController extends Game{
         gameUI.update();
     }
 
-    private void endGame() {
-        gameUI.drwaGameOver(score);
-        gameUI.update();
+    private String endGame() {
+        StringBuilder nickBuilder = new StringBuilder();
+        boolean isFinished = false;
+        Terminal terminal = gameUI.getTerminal();
+
+        try {
+
+            while (terminal.pollInput() != null) {
+                // czyscimy buffor wcisnietych klawiszy
+            }
+
+            while (!isFinished) {
+                gameUI.drwaGameOver( score, nickBuilder.toString());
+                gameUI.update();
+
+                KeyStroke keyStroke = terminal.pollInput();
+                if (keyStroke != null) {
+                    switch (keyStroke.getKeyType()) {
+                        case Enter:
+                            if (!nickBuilder.isEmpty()) {
+                                isFinished = true;
+                            }
+                            break;
+                        case Backspace:
+                            if (!nickBuilder.isEmpty()) {
+                                nickBuilder.deleteCharAt(nickBuilder.length() - 1);
+                            }
+                            break;
+                        case Character:
+                            nickBuilder.append(keyStroke.getCharacter());
+                            break;
+                    }
+                }
+
+                Thread.sleep(50);
+            }
+        } catch (IOException | InterruptedException e) {
+            e.printStackTrace();
+        }
+        return nickBuilder.toString();
     }
 
     private void cutLevel(){

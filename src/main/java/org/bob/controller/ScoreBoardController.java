@@ -1,5 +1,6 @@
 package org.bob.controller;
 
+import org.bob.model.GameResult;
 import org.bob.view.GameUI;
 
 import java.io.*;
@@ -10,20 +11,20 @@ import java.util.stream.Collectors;
 public class ScoreBoardController {
 
     private final String scoreBoardFileName = "scoreboard.txt";
-    private final LinkedList<Integer> scoreBoard;
+    private final LinkedList<GameResult> scoreBoard;
 
     public ScoreBoardController() {
         this.scoreBoard = readScoreBoard();
     }
 
-    public void addScore(int score) {
+    public void addScore(GameResult score) {
         scoreBoard.add(score);
-        scoreBoard.sort(Collections.reverseOrder());
+        scoreBoard.sort((a, b) -> Integer.compare(b.getScore(), a.getScore()));
     }
 
     public void showScoreBoard(GameUI gameUI) {
         gameUI.drawBackground();
-        gameUI.drawScoreboard(scoreBoard.stream().limit(10).collect(Collectors.toCollection(LinkedList::new)));
+        gameUI.drawScoreboard(scoreBoard.stream().limit(10).collect(Collectors.toList()));
         gameUI.update();
         while (!KeyController.isEnternProcessed());
     }
@@ -31,19 +32,24 @@ public class ScoreBoardController {
     public void saveScoreBoard() {
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(scoreBoardFileName))) {
             for (int i = 0; i < Math.min(scoreBoard.size(), 10); i++) {
-                writer.write(scoreBoard.get(i) + "\n");
+                writer.write(scoreBoard.get(i).getPlayerNick() + " - " + scoreBoard.get(i).getScore() + "\n");
             }
         } catch (IOException e) {
             e.printStackTrace();
         }
     }
 
-    private LinkedList<Integer> readScoreBoard() {
-        LinkedList<Integer> readedScoreBoard = new LinkedList<>();
+    private LinkedList<GameResult> readScoreBoard() {
+        LinkedList<GameResult> readedScoreBoard = new LinkedList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(scoreBoardFileName))) {
             String line;
             while ((line = reader.readLine()) != null && !line.equals("\n")) {
-                readedScoreBoard.add(Integer.parseInt(line));
+                String[] parts = line.split(" - ");
+                if (parts.length == 2) {
+                    String playerNick = parts[0];
+                    int score = Integer.parseInt(parts[1]);
+                    readedScoreBoard.add(new GameResult(score, playerNick));
+                }
             }
         } catch (IOException e) {
             e.printStackTrace();

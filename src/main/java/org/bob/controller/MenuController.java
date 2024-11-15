@@ -1,5 +1,6 @@
 package org.bob.controller;
 
+import org.bob.model.GameResult;
 import org.bob.view.GameUI;
 
 public class MenuController {
@@ -29,8 +30,8 @@ public class MenuController {
             if (KeyController.isEnternProcessed()) {
                 switch (selectedOption) {
                     case 0:
-                        int score = gameController.startGame();
-                        ScoreBoardController.addScore(score);
+                        GameResult result = gameController.startGame();
+                        ScoreBoardController.addScore(result);
                         while(!KeyController.isEnternProcessed());
                         break;
                     case 1:
