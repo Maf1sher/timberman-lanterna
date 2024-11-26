@@ -1,3 +1,4 @@
 Timberman created using the lanterna
 ---
-![timberman](https://github.com/user-attachments/assets/b8e212f8-4d30-4b34-8339-3e3363e1e715)
+![timberman](https://github.com/user-attachments/assets/82b9bb90-67d5-4b67-a92e-8baaf0ebb2bd)
+
