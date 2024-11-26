@@ -126,6 +126,16 @@ public class ColorView {
         );
 
         textGraphics.putString(timbermanCol - 3, timbermanRow - 5, " ");
+
+        textGraphics.setBackgroundColor(TextColor.ANSI.CYAN);
+        DrawStringManager.drawString(textGraphics,
+                """
+                          /\\ \s
+                         /  \\\s
+                         \\/\\/ \
+                        """,
+                timbermanCol + 2, timbermanRow + 8
+        );
     }
 }
 
